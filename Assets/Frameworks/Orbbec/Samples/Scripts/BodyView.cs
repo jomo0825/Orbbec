@@ -12,7 +12,7 @@ public class BodyView : MonoBehaviour
 
     public bool isDisplay = true;
 
-    [Range(10.0f, 200.0f)]
+    [Range(10.0f, 300.0f)]
     public float posScale = 10.0f;
     public Vector3 posOffset;
     [Range(0, 1)]
@@ -82,12 +82,21 @@ public class BodyView : MonoBehaviour
     //當偵測到身體資訊，打開本物件(本物件為骨架之根)
     private void OnBodyStreamChanged(bool value)
     {
-        gameObject.SetActive(value);
+        //gameObject.SetActive(value);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("o"))
+        {
+            StreamViewModel.Instance.bodyStream.Value = true;
+        }
+        if (Input.GetKeyDown("p"))
+        {
+            StreamViewModel.Instance.bodyStream.Value = false;
+        }
+
         if (!AstraManager.Instance.Initialized || !AstraManager.Instance.IsBodyOn)
         {
             return;                                 //若Astra還沒初始化，或是沒有軀體，則跳過此次update
